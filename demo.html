@@ -6,6 +6,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BlackGrid Demo – Live Fraud Shield</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Radar animation styles */
+    .radar {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,255,0.1) 0%, transparent 70%);
+      box-shadow: 0 0 15px rgba(0,255,255,0.3);
+      overflow: hidden;
+      margin: 0 auto 2rem;
+    }
+    .radar-sweep {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(90deg, transparent 50%, rgba(0,255,255,0.4) 100%);
+      animation: sweep 4s linear infinite;
+      transform-origin: center;
+      top: 0;
+      left: 0;
+    }
+    @keyframes sweep {
+      0% {transform: rotate(0deg);}
+      100% {transform: rotate(360deg);}
+    }
+    .radar-dot {
+      position: absolute;
+      background: #0ff;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: pulse 2s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0%, 100% {opacity: 0.8;}
+      50% {opacity: 0.3;}
+    }
+  </style>
 </head>
 <body class="bg-black text-white font-sans">
   <header class="bg-gray-900 py-6 px-6 flex items-center justify-between">
@@ -16,27 +55,76 @@
   <main class="px-6 py-12 max-w-5xl mx-auto">
     <h2 class="text-4xl font-extrabold mb-6 text-teal-400">Live Demo Area</h2>
     <p class="text-gray-300 mb-8">
-      Explore how BlackGrid intercepts fraud before it happens. This demo is a work in progress and will soon show live threat radar, intercepted fraud archive, AI insights, and more.
+      Explore how BlackGrid intercepts fraud before it happens. This demo simulates live threats, AI alerts, and interception logs.
     </p>
 
-    <section class="bg-gray-900 rounded-lg p-6 mb-8 shadow-lg">
-      <h3 class="text-2xl font-semibold mb-3 text-white">Threat Radar (coming soon)</h3>
-      <p class="text-gray-400 italic">Real-time fraud detection visualization will appear here.</p>
+    <section class="radar" aria-label="Threat Radar">
+      <div class="radar-sweep"></div>
+      <!-- Place some radar dots -->
+      <div class="radar-dot" style="width:12px; height:12px; top: 40%; left: 65%; animation-delay: 0s;"></div>
+      <div class="radar-dot" style="width:10px; height:10px; top: 70%; left: 30%; animation-delay: 0.3s;"></div>
+      <div class="radar-dot" style="width:8px; height:8px; top: 55%; left: 80%; animation-delay: 0.6s;"></div>
+      <div class="radar-dot" style="width:14px; height:14px; top: 20%; left: 40%; animation-delay: 0.9s;"></div>
+      <div class="radar-dot" style="width:9px; height:9px; top: 60%; left: 60%; animation-delay: 1.2s;"></div>
     </section>
 
-    <section class="bg-gray-900 rounded-lg p-6 mb-8 shadow-lg">
-      <h3 class="text-2xl font-semibold mb-3 text-white">Intercepted Fraud Archive (coming soon)</h3>
-      <p class="text-gray-400 italic">Weekly cases BlackGrid prevented will be displayed here.</p>
+    <section class="bg-gray-900 rounded-lg p-6 mb-8 shadow-lg max-w-4xl mx-auto">
+      <h3 class="text-2xl font-semibold mb-3 text-white">Intercepted Fraud Feed</h3>
+      <div id="fraud-feed" class="text-gray-400 max-h-48 overflow-y-auto font-mono text-sm space-y-2" aria-live="polite" aria-atomic="true">
+        <!-- Dynamic feed updates here -->
+      </div>
     </section>
 
-    <section class="bg-gray-900 rounded-lg p-6 shadow-lg">
-      <h3 class="text-2xl font-semibold mb-3 text-white">AI Insights & Alerts (coming soon)</h3>
-      <p class="text-gray-400 italic">Learn how our AI detects suspicious patterns.</p>
+    <section class="bg-gray-900 rounded-lg p-6 shadow-lg max-w-4xl mx-auto">
+      <h3 class="text-2xl font-semibold mb-3 text-white">AI Insights & Alerts</h3>
+      <div id="ai-insights" class="text-gray-400 max-h-32 overflow-y-auto font-mono text-sm space-y-2" aria-live="polite" aria-atomic="true">
+        <!-- Dynamic AI messages here -->
+      </div>
     </section>
   </main>
 
   <footer class="bg-gray-900 py-6 px-6 text-center text-sm text-gray-500">
     © BlackGrid™ 2025. All rights reserved.
   </footer>
+
+  <script>
+    // Sample fraud feed messages
+    const fraudMessages = [
+      "[09:02:15] Blocked phishing attempt targeting NHS credentials.",
+      "[09:02:29] SIM swap fraud prevented on UK mobile network.",
+      "[09:02:44] Fake heating grant scam SMS intercepted.",
+      "[09:02:59] AI detected anomalous wallet token drop.",
+      "[09:03:12] Clone trap triggered on fraudulent login.",
+      "[09:03:27] Proxy VPN swarm neutralized on fraud vector.",
+      "[09:03:42] Suspicious deepfake crypto airdrop blocked."
+    ];
+
+    // Sample AI insights messages
+    const aiMessages = [
+      "Pattern recognized: SIM swap signatures.",
+      "Risk score rising on heating grant scams.",
+      "Threat vector isolated and quarantined.",
+      "Anomalous transaction flagged for review.",
+      "AI clone detection system activated.",
+      "Suspicious proxy activity under surveillance."
+    ];
+
+    const fraudFeed = document.getElementById('fraud-feed');
+    const aiInsights = document.getElementById('ai-insights');
+
+    function appendMessage(container, messages) {
+      const message = messages[Math.floor(Math.random() * messages.length)];
+      const div = document.createElement('div');
+      div.textContent = message;
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // Append messages every 3 seconds
+    setInterval(() => {
+      appendMessage(fraudFeed, fraudMessages);
+      appendMessage(aiInsights, aiMessages);
+    }, 3000);
+  </script>
 </body>
 </html>
