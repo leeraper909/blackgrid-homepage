@@ -1,0 +1,1 @@
+console.log('BlackGrid 2030 script loaded');
