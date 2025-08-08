@@ -7,30 +7,40 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1 class="animate-title">BlackGrid</h1>
-    <p class="tagline">The world’s first sovereign AI defence & cybersecurity system</p>
-  </header>
+<header class="site-header">
+  <div class="brand">BlackGrid</div>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="defcon.html">DEFCON Mesh</a>
+    <a href="trustpack.html">Trust Pack</a>
+    <a href="demo.html">Demo</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
 
-  <section class="hero">
-    <img src="defcon_mock_visual.png" alt="DEFCON Visual Mock" class="defcon-img"/>
-    <div class="glow-bar"></div>
-  </section>
+<section class="hero" style="--hero:url('assets/hero_cinematic.png')">
+  <div class="hero-content">
+    <h1>Always watching. Always learning. Never sleeping.</h1>
+    <p class="sub">8,000+ inventions. 260,000+ threats intercepted. Sovereign. Uncopyable.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="trustpack.html">View Trust Pack</a>
+      <a class="btn" href="defcon.html">Live DEFCON Mesh</a>
+      <a class="btn" href="demo.html">Open Demo Portal</a>
+    </div>
+  </div>
+</section>
+<section id="defcon" class="panel">
+  <h2>DEFCON Status: <span id="defcon-level">3</span></h2>
+  <div class="defcon-bar"><div class="pulse"></div></div>
+</section>
+<section id="trust" class="panel">
+  <h2>Trust at national scale.</h2>
+  <p>Immutable trust signals, fraud interception, and AI mutation capture — from the edge to the core.</p>
+</section>
 
-  <section class="features">
-    <h2>Elite Features</h2>
-    <ul>
-      <li>🔒 CloneTrap™ Technology</li>
-      <li>🌍 VPN‑Proof GeoLocking</li>
-      <li>🧠 AI Mutation Detection</li>
-      <li>📊 Live DEFCON Signal Mesh</li>
-      <li>⚔️ Trust Score Interceptor Engine</li>
-    </ul>
-  </section>
-
-  <footer>
-    <p>© 2025 BlackGrid. Always watching. Always learning. Never sleeping.</p>
-  </footer>
-  <script src="script.js"></script>
+<footer class="site-footer">
+  <div>© 2025 BlackGrid — Sovereign AI Defence</div>
+</footer>
+<script src="script.js"></script>
 </body>
 </html>

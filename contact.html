@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BlackGrid — Sovereign AI Defence</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="site-header">
+  <div class="brand">BlackGrid</div>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="defcon.html">DEFCON Mesh</a>
+    <a href="trustpack.html">Trust Pack</a>
+    <a href="demo.html">Demo</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="panel">
+  <a class="back" href="index.html">← Back to Home</a>
+  <h1>Contact</h1>
+  <form class="contact" onsubmit="return fakeSubmit(event)">
+    <label> Name <input required /></label>
+    <label> Email <input type="email" required /></label>
+    <label> Message <textarea required></textarea></label>
+    <button class="btn primary" type="submit">Send</button>
+  </form>
+  <p id="contact-result" class="note" hidden>✅ Message received. We’ll be in touch.</p>
+</main>
+
+<footer class="site-footer">
+  <div>© 2025 BlackGrid — Sovereign AI Defence</div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
