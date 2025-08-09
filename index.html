@@ -1,46 +1,207 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BlackGrid — Sovereign AI Defence</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-<header class="site-header">
-  <div class="brand">BlackGrid</div>
+
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>BlackGrid — Sovereign AI Defence & Cybersecurity</title>
+<meta name="description" content="BlackGrid is the world’s first sovereign AI defence and cybersecurity system — stopping both legacy and AI-powered threats before they strike.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%2364d2ff'/%3E%3Cpath d='M14 34h36' stroke='%230b0f17' stroke-width='6'/%3E%3C/svg%3E"/>
+<style>
+:root{
+  --bg: #0b0f17; --surface:#121826; --muted:#1a2235; --text:#e6eefc; --sub:#a4b2d1;
+  --brand:#64d2ff; --accent:#9a7bff; --ok:#22c55e; --warn:#f59e0b; --bad:#ef4444;
+  --shadow: 0 10px 30px rgba(0,0,0,.45);
+}
+:root.light{
+  --bg:#f7f9ff; --surface:#ffffff; --muted:#eef2ff; --text:#0c1322; --sub:#3a4a6a;
+  --brand:#0066ff; --accent:#6d28d9; 
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;
+background:linear-gradient(180deg,var(--bg),#0b1224 60%,var(--bg));color:var(--text)}
+a{color:var(--brand);text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+.header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--surface),rgba(0,0,0,0));
+backdrop-filter:blur(8px); border-bottom:1px solid rgba(255,255,255,.06)}
+.nav{display:flex;align-items:center;gap:16px;justify-content:space-between;padding:14px 24px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.4px}
+.logo svg{width:28px;height:28px;filter:drop-shadow(0 4px 10px rgba(100,210,255,.6))}
+.actions{display:flex;align-items:center;gap:10px}
+.btn{padding:10px 14px;border-radius:14px;background:var(--muted);color:var(--text);
+border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);font-weight:600}
+.btn:hover{transform:translateY(-1px);}
+.toggle{cursor:pointer}
+.hero{padding:72px 24px 36px}
+.h1{font-size:42px;line-height:1.1;margin:0 0 12px;font-weight:800}
+.h2{font-size:28px;opacity:.92;margin:0 0 8px}
+.p{font-size:16px;color:var(--sub);max-width:850px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card{grid-column:span 4;background:linear-gradient(180deg,var(--surface),#0d1325);padding:18px;border-radius:20px;border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow)}
+.card h3{margin:6px 0 8px}
+.tag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(100,210,255,.12);border:1px solid rgba(100,210,255,.25);font-size:12px;font-weight:700;color:var(--text)}
+.footer{padding:24px;color:var(--sub);border-top:1px solid rgba(255,255,255,.06);margin-top:24px}
+.defcon{position:sticky;top:64px;z-index:40;background:linear-gradient(90deg,#00ffb2,#eaff00,#ffb200,#ff0059);height:10px;border-radius:999px;margin:0 24px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.defcon .pulse{width:20%;height:100%;background:rgba(255,255,255,.6);filter:blur(6px);animation:pulse 3s infinite}
+@keyframes pulse{0%{transform:translateX(-100%)}100%{transform:translateX(600%)}}
+.globe{height:300px;border-radius:24px;border:1px solid rgba(255,255,255,.08);display:grid;place-items:center;background:radial-gradient(120% 120% at 80% 10%, rgba(100,210,255,.2), transparent), radial-gradient(120% 120% at 20% 90%, rgba(154,123,255,.18), transparent), linear-gradient(180deg,var(--surface),#0c1222)}
+.globe svg{width:85%;max-width:680px;opacity:.92;filter:drop-shadow(0 12px 30px rgba(0,0,0,.5))}
+.partners{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.partner{height:52px;border-radius:12px;background:var(--muted);border:1px dashed rgba(255,255,255,.1);display:grid;place-items:center;color:var(--sub);font-size:12px}
+.tile{background:linear-gradient(180deg,var(--surface),#0d1426);border:1px solid rgba(255,255,255,.08);padding:16px;border-radius:16px;box-shadow:var(--shadow);transition:transform .18s ease}
+.tile:hover{transform:translateY(-4px) scale(1.01)}
+.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(255,255,255,.08);padding:2px 6px;border-radius:8px}
+.back{display:inline-flex;align-items:center;gap:8px;margin:8px 0 0}
+.notice{padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--sub);margin:8px 0}
+@media (max-width: 900px){
+ .grid{grid-template-columns:repeat(6,1fr)}
+ .card{grid-column:span 6}
+ .partners{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head><body>
+<header class="header">
   <nav class="nav">
-    <a href="index.html">Home</a>
-    <a href="defcon.html">DEFCON Mesh</a>
-    <a href="trustpack.html">Trust Pack</a>
-    <a href="demo.html">Demo</a>
-    <a href="contact.html">Contact</a>
+    <div class="logo">
+      <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="#64d2ff"/><path d="M6 17h20" stroke="#0b0f17" stroke-width="3"/></svg>
+      <span>BlackGrid</span>
+    </div>
+    <div class="actions">
+      <a href="../fraudwatch/index.html" class="btn">FraudWatch</a>
+      <a href="../demo-portal/index.html" class="btn">Demo Portal</a>
+      <button class="btn toggle" data-toggle>Toggle Theme</button>
+    </div>
   </nav>
 </header>
 
-<section class="hero" style="--hero:url('assets/hero_cinematic.png')">
-  <div class="hero-content">
-    <h1>Always watching. Always learning. Never sleeping.</h1>
-    <p class="sub">8,000+ inventions. 260,000+ threats intercepted. Sovereign. Uncopyable.</p>
-    <div class="cta-row">
-      <a class="btn primary" href="trustpack.html">View Trust Pack</a>
-      <a class="btn" href="defcon.html">Live DEFCON Mesh</a>
-      <a class="btn" href="demo.html">Open Demo Portal</a>
+<div class="defcon" data-defcon>
+  <div class="pulse"></div>
+</div>
+
+<section class="hero container">
+  <h1 class="h1">World’s first sovereign AI defence & cybersecurity system</h1>
+  <p class="p">Always watching. Always learning. Never sleeping. Built in the UK to stop legacy fraud, insider abuse, infrastructure breaches, and new AI‑powered threats <em>before they strike</em>.</p>
+  <div class="grid" style="margin-top:18px">
+    <div class="card">
+      <span class="tag"> <span>•</span><strong>DEFCON 3</strong></span>
+      <h3>Live Threat Mesh</h3>
+      <p class="p">Real‑time intercepts, geo‑fencing, VPN‑proof controls. Public‑safe display.</p>
+    </div>
+    <div class="card">
+      <span class="tag"><strong>Trust Pack</strong></span>
+      <h3>Investor & GOV‑ready</h3>
+      <p class="p">Links wired but hidden by default. Replace with your live Trust Pack URL.</p>
+    </div>
+    <div class="card">
+      <span class="tag"><strong>Zero Interference</strong></span>
+      <h3>System‑safe by design</h3>
+      <p class="p">Lightweight, tamper‑resistant, built for public + enterprise scale.</p>
     </div>
   </div>
 </section>
-<section id="defcon" class="panel">
-  <h2>DEFCON Status: <span id="defcon-level">3</span></h2>
-  <div class="defcon-bar"><div class="pulse"></div></div>
-</section>
-<section id="trust" class="panel">
-  <h2>Trust at national scale.</h2>
-  <p>Immutable trust signals, fraud interception, and AI mutation capture — from the edge to the core.</p>
+
+<section class="container">
+  <div class="globe">
+    
+<svg viewBox="0 0 800 400" role="img" aria-label="Wire Globe">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#64d2ff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#64d2ff" stop-opacity="0.05"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="400" cy="200" rx="220" ry="220" fill="url(#g)"/>
+  <g stroke="#9ab6ff" stroke-opacity="0.35" fill="none">
+    <ellipse cx="400" cy="200" rx="20" ry="220" />
+<ellipse cx="400" cy="200" rx="40" ry="220" />
+<ellipse cx="400" cy="200" rx="60" ry="220" />
+<ellipse cx="400" cy="200" rx="80" ry="220" />
+<ellipse cx="400" cy="200" rx="100" ry="220" />
+<ellipse cx="400" cy="200" rx="120" ry="220" />
+<ellipse cx="400" cy="200" rx="140" ry="220" />
+<ellipse cx="400" cy="200" rx="160" ry="220" />
+<ellipse cx="400" cy="200" rx="180" ry="220" />
+<ellipse cx="400" cy="200" rx="200" ry="220" />
+<ellipse cx="400" cy="200" rx="220" ry="220" />
+    <ellipse cx="400" cy="200" rx="220" ry="20" />
+<ellipse cx="400" cy="200" rx="220" ry="40" />
+<ellipse cx="400" cy="200" rx="220" ry="60" />
+<ellipse cx="400" cy="200" rx="220" ry="80" />
+<ellipse cx="400" cy="200" rx="220" ry="100" />
+<ellipse cx="400" cy="200" rx="220" ry="120" />
+<ellipse cx="400" cy="200" rx="220" ry="140" />
+<ellipse cx="400" cy="200" rx="220" ry="160" />
+<ellipse cx="400" cy="200" rx="220" ry="180" />
+<ellipse cx="400" cy="200" rx="220" ry="200" />
+<ellipse cx="400" cy="200" rx="220" ry="220" />
+  </g>
+</svg>
+
+  </div>
+  <div id="globe-output" class="container" style="padding-top:8px"></div>
+  <div class="actions" style="padding:8px 24px 0">
+    <button class="btn" onclick="shutdownRegion('Nation')">Shutdown Nation (Sim)</button>
+    <button class="btn" onclick="shutdownRegion('Region')">Shutdown Region (Sim)</button>
+    <button class="btn" onclick="shutdownRegion('Facility')">Shutdown Facility (Sim)</button>
+  </div>
 </section>
 
-<footer class="site-footer">
-  <div>© 2025 BlackGrid — Sovereign AI Defence</div>
+<section class="container">
+  <h2 class="h2">Generic Partner Honour Wall</h2>
+  <p class="p">Public version shows placeholders only (per instruction). Real partner identities hidden.</p>
+  <div class="partners">
+    <div class="partner">Partner 1</div>
+<div class="partner">Partner 2</div>
+<div class="partner">Partner 3</div>
+<div class="partner">Partner 4</div>
+<div class="partner">Partner 5</div>
+<div class="partner">Partner 6</div>
+<div class="partner">Partner 7</div>
+<div class="partner">Partner 8</div>
+<div class="partner">Partner 9</div>
+<div class="partner">Partner 10</div>
+<div class="partner">Partner 11</div>
+<div class="partner">Partner 12</div>
+  </div>
+</section>
+
+<footer class="footer container">
+  <div>© 2025 BlackGrid — 100% British‑built. 8,000+ patented inventions. (Public-safe copy)</div>
+  <div class="back"><a href="../index.html">Back to Home Index</a></div>
 </footer>
-<script src="script.js"></script>
-</body>
-</html>
+<script>
+
+const toggle = document.querySelector('[data-toggle]');
+toggle?.addEventListener('click', ()=>{
+  document.documentElement.classList.toggle('light');
+  localStorage.setItem('theme', document.documentElement.classList.contains('light')?'light':'dark');
+});
+const saved = localStorage.getItem('theme'); if(saved==='light'){document.documentElement.classList.add('light')}
+
+const defconState = { level: 3 };
+function setDEFCON(lvl){
+  defconState.level = Math.max(1, Math.min(5, lvl));
+  document.querySelectorAll('[data-defcon]').forEach(el=>{
+    el.setAttribute('data-defcon', String(defconState.level));
+    const tag = el.querySelector('.tag strong');
+    if(tag) tag.textContent = 'DEFCON ' + defconState.level;
+  });
+}
+window.setDEFCON = setDEFCON;
+
+document.querySelectorAll('[data-module]').forEach(tile=>{
+  tile.addEventListener('click', ()=>{
+    const m = tile.getAttribute('data-module');
+    const out = document.querySelector('#module-output');
+    if(!out) return;
+    out.innerHTML = `<div class="notice"><strong>Module loaded:</strong> ${m}. Trust Score sync ready. (Simulated)</div>`;
+  });
+});
+
+function shutdownRegion(label='Region'){
+  const out = document.querySelector('#globe-output');
+  if(!out) return;
+  out.innerHTML = `<div class="notice"><strong>Action:</strong> Geo-fence applied to <span class="kbd">${label}</span>. Routes throttled + identity gates raised. (Simulated)</div>`;
+}
+window.shutdownRegion = shutdownRegion;
+
+</script>
+</body></html>
